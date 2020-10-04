@@ -95,9 +95,8 @@ Vagrant.configure("2") do |config|
         node.vm.provision "setup-dns", type: "shell", :path => "scripts/update-dns.sh"
     end
   end
-end
 
-# Provision Load Balancer Node
+  # Provision Load Balancer Node
   config.vm.define "loadbalancer" do |node|
     node.vm.provider "virtualbox" do |vb|
         vb.name = "loadbalancer"
@@ -106,7 +105,7 @@ end
     end
     node.vm.hostname = "loadbalancer"
     node.vm.network :private_network, ip: "192.168.30.1"
-	node.vm.network "forwarded_port", guest: 22, host: 2730
+	node.vm.network "forwarded_port", guest: 22, host: 2731
 
     node.vm.provision "setup-hosts", :type => "shell", :path => "scripts/setup-hosts.sh" do |s|
       s.args = ["enp0s8"]
@@ -125,7 +124,7 @@ end
     end
     node.vm.hostname = "docker-registry"
     node.vm.network :private_network, ip: "192.168.30.2"
-	node.vm.network "forwarded_port", guest: 22, host: 2730
+	node.vm.network "forwarded_port", guest: 22, host: 2732
 
     node.vm.provision "setup-hosts", :type => "shell", :path => "scripts/setup-hosts.sh" do |s|
       s.args = ["enp0s8"]
@@ -134,3 +133,4 @@ end
     node.vm.provision "setup-dns", type: "shell", :path => "scripts/update-dns.sh"
 
   end
+end
