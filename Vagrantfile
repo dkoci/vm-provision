@@ -99,10 +99,14 @@ Vagrant.configure("2") do |config|
         node.vm.provision "install-docker", type: "shell", :path => "scripts/install-docker-2.sh"
     end
   end
-end
 
+<<<<<<< HEAD
 # Provision Load Balancer Node
 config.vm.define "loadbalancer" do |node|
+=======
+  # Provision Load Balancer Node
+  config.vm.define "loadbalancer" do |node|
+>>>>>>> 4b85b8e63777216e157281e2e90108275f0e5738
     node.vm.provider "virtualbox" do |vb|
         vb.name = "loadbalancer"
         vb.memory = 512
@@ -110,7 +114,7 @@ config.vm.define "loadbalancer" do |node|
     end
     node.vm.hostname = "loadbalancer"
     node.vm.network :private_network, ip: "192.168.30.1"
-	node.vm.network "forwarded_port", guest: 22, host: 2730
+	node.vm.network "forwarded_port", guest: 22, host: 2731
 
     node.vm.provision "setup-hosts", :type => "shell", :path => "scripts/setup-hosts.sh" do |s|
       s.args = ["enp0s8"]
@@ -129,7 +133,7 @@ end
     end
     node.vm.hostname = "docker-registry"
     node.vm.network :private_network, ip: "192.168.30.2"
-	node.vm.network "forwarded_port", guest: 22, host: 2730
+	node.vm.network "forwarded_port", guest: 22, host: 2732
 
     node.vm.provision "setup-hosts", :type => "shell", :path => "scripts/setup-hosts.sh" do |s|
       s.args = ["enp0s8"]
@@ -140,3 +144,4 @@ end
     node.vm.provision "install-docker", type: "shell", :path => "scripts/install-docker-2.sh"
 
   end
+end
