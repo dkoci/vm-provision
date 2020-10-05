@@ -136,7 +136,7 @@ Vagrant.configure("2") do |config|
 
     node.vm.provision "setup-dns", type: "shell", :path => "scripts/update-dns.sh"
     node.vm.provision "allow-bridge-nf-traffic", :type => "shell", :path => "scripts/allow-bridge-nf-traffic.sh"
-    node.vm.provision "install-docker", type: "shell", :path => "scripts/install-docker-2.sh"
+    #node.vm.provision "install-docker", type: "shell", :path => "scripts/install-docker-2.sh"
 
   end
 end
