@@ -71,6 +71,8 @@ Vagrant.configure("2") do |config|
         end
 
         node.vm.provision "setup-dns", type: "shell", :path => "scripts/update-dns.sh"
+        node.vm.provision "allow-bridge-nf-traffic", :type => "shell", :path => "scripts/allow-bridge-nf-traffic.sh"
+        node.vm.provision "install-docker", type: "shell", :path => "scripts/install-docker-2.sh"
 
       end
   end
@@ -93,12 +95,14 @@ Vagrant.configure("2") do |config|
         end
 
         node.vm.provision "setup-dns", type: "shell", :path => "scripts/update-dns.sh"
+        node.vm.provision "allow-bridge-nf-traffic", :type => "shell", :path => "scripts/allow-bridge-nf-traffic.sh"
+        node.vm.provision "install-docker", type: "shell", :path => "scripts/install-docker-2.sh"
     end
   end
 end
 
 # Provision Load Balancer Node
-  config.vm.define "loadbalancer" do |node|
+config.vm.define "loadbalancer" do |node|
     node.vm.provider "virtualbox" do |vb|
         vb.name = "loadbalancer"
         vb.memory = 512
@@ -114,7 +118,7 @@ end
 
     node.vm.provision "setup-dns", type: "shell", :path => "scripts/update-dns.sh"
 
-  end
+end
 
   # Provision Private Docker Registry Node
   config.vm.define "docker-registry" do |node|
@@ -132,5 +136,7 @@ end
     end
 
     node.vm.provision "setup-dns", type: "shell", :path => "scripts/update-dns.sh"
+    node.vm.provision "allow-bridge-nf-traffic", :type => "shell", :path => "scripts/allow-bridge-nf-traffic.sh"
+    node.vm.provision "install-docker", type: "shell", :path => "scripts/install-docker-2.sh"
 
   end
