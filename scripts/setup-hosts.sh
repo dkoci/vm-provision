@@ -5,7 +5,7 @@ ADDRESS="$(ip -4 addr show $IFNAME | grep "inet" | head -1 |awk '{print $2}' | c
 sed -e "s/^.*${HOSTNAME}.*/${ADDRESS} ${HOSTNAME} ${HOSTNAME}.local/" -i /etc/hosts
 
 # remove ubuntu-bionic entry
-sed -e '/^.*ubuntu-bionic.*/d' -i /etc/hosts
+sed -e '/^.*ubuntu-xenial.*/d' -i /etc/hosts
 
 # Update /etc/hosts about other hosts
 cat >> /etc/hosts <<EOF
