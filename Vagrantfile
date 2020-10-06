@@ -139,4 +139,24 @@ Vagrant.configure("2") do |config|
     #node.vm.provision "install-docker", type: "shell", :path => "scripts/install-docker-2.sh"
 
   end
+
+  config.vm.define "kmaster00" do |node|
+    # Name shown in the GUI
+      node.vm.provider "virtualbox" do |vb|
+          vb.name = "kmaster00"
+          vb.memory = 2048
+          vb.cpus = 2
+      end
+      node.vm.hostname = "kmaster00"
+      node.vm.network :private_network, ip: "192.168.10.2"
+      node.vm.network "forwarded_port", guest: 22, host: 2712"
+
+      node.vm.provision "setup-hosts", :type => "shell", :path => "scripts/setup-hosts.sh" do |s|
+        s.args = ["enp0s8"]
+      end
+
+      node.vm.provision "setup-dns", type: "shell", :path => "scripts/update-dns.sh"
+      node.vm.provision "allow-bridge-nf-traffic", :type => "shell", :path => "scripts/allow-bridge-nf-traffic.sh"
+
+  end
 end
