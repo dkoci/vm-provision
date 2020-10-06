@@ -149,7 +149,7 @@ Vagrant.configure("2") do |config|
       end
       node.vm.hostname = "kmaster00"
       node.vm.network :private_network, ip: "192.168.10.2"
-      node.vm.network "forwarded_port", guest: 22, host: 2712"
+      node.vm.network "forwarded_port", guest: 22, host: "2712"
 
       node.vm.provision "setup-hosts", :type => "shell", :path => "scripts/setup-hosts.sh" do |s|
         s.args = ["enp0s8"]
